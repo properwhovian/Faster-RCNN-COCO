@@ -22,7 +22,7 @@ logger.info("All necessary libraries loaded successfully.")
 # Hyperparameters
 learning_rate = 1e-4
 batch_size = 4
-num_epochs = 5
+num_epochs = 50
 optimizer_type = "Adam"
 
 # Log hyperparameters
