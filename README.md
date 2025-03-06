@@ -21,5 +21,5 @@ Install dependencies using the following:
 pip install -r requirements.txt
 ```
 ## Acknowledgments
-This project is based on the Object Detection with Faster R-CNN repository by Sarojini Sharon.  
+This project is idea based on the Object Detection with Faster R-CNN repository by Sarojini Sharon.  
 GitHub Repository: [Object Detection with Faster R-CNN](https://github.com/sarojinisharon/Object-Detection-with-Faster-R-CNN.git)
