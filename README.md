@@ -29,7 +29,7 @@ Clone the repository:
 ```
 bash
 
-git clone https://github.com/properwhovian/faster-rcnn-coco.git
+git clone https://github.com/properwhovian/Faster-RCNN-COCO.git
 cd faster-rcnn-coco
 ```
 ## Download COCO dataset: 
