@@ -1,4 +1,4 @@
-import logging 
+import logging
 import torch
 import torchvision
 import fiftyone as fo
@@ -148,7 +148,7 @@ class CustomFiftyOneDataset(torch.utils.data.Dataset):
         self.sample_ids = [sample.id for sample in self.dataset]  # Get sample IDs for iteration
     
     def __getitem__(self, idx):
-        sample = self.dataset.get(self.sample_ids[idx])  # Use sample ID to fetch the sample
+        sample = self.dataset.get(idx)  # Corrected to use the sample ID directly instead of numeric indexing
         
         # Access the image and annotation from the sample
         image_path = sample['filepath']
@@ -210,6 +210,7 @@ def plot_metrics(train_losses, average_precisions):
 
 # After training, plot the metrics
 plot_metrics(train_losses, average_precisions)
+
 
 
 # Launching FiftyOne session
