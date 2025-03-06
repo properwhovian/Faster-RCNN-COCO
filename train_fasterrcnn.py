@@ -1,4 +1,4 @@
-import logging
+import logging 
 import torch
 import torchvision
 import fiftyone as fo
@@ -145,10 +145,10 @@ class CustomFiftyOneDataset(torch.utils.data.Dataset):
     def __init__(self, dataset):
         self.dataset = dataset
         self.transform = transforms.Compose([transforms.ToTensor()])  # Example transform
+        self.sample_ids = [sample.id for sample in self.dataset]  # Get sample IDs for iteration
     
     def __getitem__(self, idx):
-        # Get the sample ID
-        sample = self.dataset[idx]
+        sample = self.dataset.get(self.sample_ids[idx])  # Use sample ID to fetch the sample
         
         # Access the image and annotation from the sample
         image_path = sample['filepath']
