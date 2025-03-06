@@ -4,8 +4,8 @@ import torchvision
 import fiftyone as fo
 import fiftyone.zoo as foz
 from torchvision.models.detection import FasterRCNN
-from torch.utils.data import DataLoader, Dataset
-from torchvision import transforms
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
 from torch import nn, optim
 from PIL import Image
 import numpy as np
@@ -43,48 +43,6 @@ try:
 except Exception as e:
     logger.error(f"Error loading dataset: {e}")
     raise e
-
-# Define the custom Dataset class for `fiftyone` dataset
-class FiftyOneCOCODataset(Dataset):
-    def __init__(self, dataset, transform=None):
-        self.dataset = dataset  # The fiftyone dataset
-        self.transform = transform
-
-    def __len__(self):
-        return len(self.dataset)
-
-    def __getitem__(self, idx):
-        sample = self.dataset[idx]
-        image_path = sample.filepath  # Get the image file path
-        image = Image.open(image_path).convert("RGB")  # Open image
-
-        # Apply transformations if provided
-        if self.transform:
-            image = self.transform(image)
-
-        # Get the corresponding annotations
-        annotations = sample["detections"]  # Assuming you have a 'detections' field
-
-        # Convert annotations to the format expected by Faster R-CNN
-        target = {}
-        boxes = []
-        labels = []
-        for ann in annotations:
-            boxes.append(ann.bounding_box)
-            labels.append(ann.label)
-
-        target["boxes"] = torch.tensor(boxes, dtype=torch.float32)
-        target["labels"] = torch.tensor(labels, dtype=torch.int64)
-
-        return image, target
-
-# Example usage for transformations and DataLoader
-transform = transforms.Compose([
-    transforms.ToTensor(),
-])
-
-train_dataset = FiftyOneCOCODataset(train_dataset, transform=transform)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 # Load the pre-trained Faster R-CNN model
 try:
@@ -182,6 +140,41 @@ def compute_ap(ground_truths, predictions):
     ap = coco_eval.stats[0]  # AP at IoU=0.5
     return ap
 
+# DataLoader for training data (Updated code to use FiftyOne's sample access method)
+class CustomFiftyOneDataset(torch.utils.data.Dataset):
+    def __init__(self, dataset):
+        self.dataset = dataset
+        self.transform = transforms.Compose([transforms.ToTensor()])  # Example transform
+    
+    def __getitem__(self, idx):
+        # Get the sample ID
+        sample = self.dataset[idx]
+        
+        # Access the image and annotation from the sample
+        image_path = sample['filepath']
+        annotations = sample['ground_truth']
+        
+        # Process the image (open, transform, etc.)
+        image = Image.open(image_path)
+        image = self.transform(image)
+        
+        # Prepare the targets for the model
+        targets = []
+        for annotation in annotations.detections:
+            target = {
+                'bbox': annotation.bounding_box,  # Assuming it's in [xmin, ymin, xmax, ymax]
+                'category_id': annotation.label,
+                'area': annotation.area,
+                'iscrowd': 0,
+                'image_id': sample.id
+            }
+            targets.append(target)
+
+        return image, targets
+
+# DataLoader for training data
+train_loader = DataLoader(CustomFiftyOneDataset(train_dataset), batch_size=batch_size, shuffle=True)
+
 # Initialize the optimizer
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -219,8 +212,6 @@ def plot_metrics(train_losses, average_precisions):
 plot_metrics(train_losses, average_precisions)
 
 
-
 # Launching FiftyOne session
 #session = fo.launch_app()
 #session.dataset = train_dataset
-
