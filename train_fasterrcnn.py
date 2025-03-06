@@ -148,7 +148,8 @@ class CustomFiftyOneDataset(torch.utils.data.Dataset):
         self.sample_ids = [sample.id for sample in self.dataset]  # Get sample IDs for iteration
     
     def __getitem__(self, idx):
-        sample = self.dataset.get(idx)  # Corrected to use the sample ID directly instead of numeric indexing
+        # Use sample ID instead of numeric index
+        sample = self.dataset[self.sample_ids[idx]]  # Access by sample ID
         
         # Access the image and annotation from the sample
         image_path = sample['filepath']
