@@ -1,25 +1,50 @@
-# Faster R-CNN with COCO Dataset
+# Final Project: Object Detection with Knowledge Distillation
 
-This repository contains a script to train a Faster R-CNN model using the COCO 2017 dataset for object detection.
+## Overview
 
-## Requirements
+This project aims to develop an object detection pipeline using the COCO dataset and implements the following tasks:
 
-- Python 3.x
-- PyTorch
-- torchvision
-- fiftyone
-- pycocotools
-- matplotlib
-- numpy
-- scipy
-- pillow
+- **Data Distillation**: A method for reducing the dataset size without sacrificing too much accuracy.
+- **Knowledge Distillation**: A student model is trained to learn from a teacher model using knowledge transfer techniques.
 
-## Installation
+## Repository Structure
 
-Install dependencies using the following:
 ```bash
-pip install -r requirements.txt
-```
-## Acknowledgments
-This project is idea based on the Object Detection with Faster R-CNN repository by Sarojini Sharon.  
-GitHub Repository: [Object Detection with Faster R-CNN](https://github.com/sarojinisharon/Object-Detection-with-Faster-R-CNN.git)
+/final_project/
+│
+├── /data/                        # Raw data or scripts to download and preprocess data
+│   ├── /raw/                     # Raw dataset ( COCO dataset)
+│   ├── /processed/                # Processed datasets (after cleaning, augmentation, etc.)
+│   ├── download_data.py           # Script to download and preprocess data
+│
+├── /models/                       # Model implementations
+│   ├── base_model.py              # Base model architecture (Report 1)
+│   ├── student_model.py           # Student model architecture (Report 3)
+│   ├── train.py                   # Training script for the model
+│   ├── evaluate.py                # Evaluation script to reproduce metrics from Report 1
+│   ├── distillation.py            # Data distillation implementation (Report 2)
+│   ├── distillation_analysis.py   # Code for generating synthetic samples and performance trade-offs
+│
+├── /notebooks/                    # Jupyter Notebooks 
+│   ├── data_processing.ipynb      # Data processing and analysis notebook
+│   ├── model_training.ipynb       # Training and evaluation notebook for the base model
+│   ├── distillation.ipynb         # Notebook showing the performance comparison and analysis
+│
+├── /scripts/                      #  scripts for environment setup or utilities
+│   ├── environment.yml            # Conda environment configuration
+│   ├── requirements.txt           # Python dependencies
+│   ├── setup.py                   # Script for installation setup
+│
+├── /results/                      # Folder to save model checkpoints, logs, and evaluation results
+│   ├── model_checkpoints/         # Saved models
+│   ├── logs/                      # Training logs
+│
+├── /docs/                         # Documentation files
+│   ├── README.md                  # README file (project overview, instructions)
+│   ├── report_1.md                # Report 1 (Base model results)
+│   ├── report_2.md                # Report 2 (Data distillation results)
+│   ├── report_3.md                # Report 3 (Knowledge distillation results)
+│
+├── .gitignore                     # Git ignore file to exclude unnecessary files
+└── README.md                      # Comprehensive project documentation
+
