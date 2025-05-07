@@ -9,36 +9,43 @@ This project aims to develop an object detection pipeline using the COCO dataset
 
 ## Repository Structure
 
-```bash
-/final_project/
+project_root/
 │
-├── /data/                        # Raw data or scripts to download and preprocess data
-│   ├── /raw/                     # Raw dataset ( COCO dataset)
-│   ├── /processed/                # Processed datasets (after cleaning, augmentation, etc.)
-│   ├── download_data.py           # Script to download and preprocess data
+├── data_processing/
+│   ├── data_preprocessing.py  # Code for importing, cleaning, and processing dataset
+│   ├── data_augmentation.py   # Data augmentation techniques (if applicable)
+│   ├── create_splits.py       # Code for creating training, validation, and testing splits
+│   └── README.md              # Documentation for data processing
 │
-├── /models/                       # Model implementations
-│   ├── base_model.py              # Base model architecture (Report 1)
-│   ├── student_model.py           # Student model architecture (Report 3)
-│   ├── train.py                   # Training script for the model
-│   ├── evaluate.py                # Evaluation script to reproduce metrics from Report 1
-│   ├── distillation.py            # Data distillation implementation (Report 2)
-│   ├── distillation_analysis.py   # Code for generating synthetic samples and performance trade-offs
+├── base_model/
+│   ├── model.py               # Full implementation of the main model architecture
+│   ├── train.py               # Training script for the model
+│   ├── evaluate.py            # Evaluation script for the model
+│   ├── checkpoints/           # Directory for saved model checkpoints or weights
+│   ├── report_1_metrics.py    # Code to reproduce performance metrics from Report 1
+│   └── README.md              # Documentation for base model
 │
-├── /notebooks/                    # Jupyter Notebooks 
-│   ├── data_processing.ipynb      # Data processing and analysis notebook
-│   ├── model_training.ipynb       # Training and evaluation notebook for the base model
-│   ├── distillation.ipynb         # Notebook showing the performance comparison and analysis
+├── data_distillation/
+│   ├── distillation.py        # Implementation of data distillation approach
+│   ├── generate_synthetic_samples.py  # Code for generating synthetic samples
+│   ├── distillation_evaluation.py    # Scripts measuring performance trade-offs
+│   ├── performance_comparison.py     # Code comparing performance loss and training time
+│   ├── distillation_results/        # Directory for results from Report 2
+│   └── README.md              # Documentation for data distillation
 │
-├── /scripts/                      #  scripts for environment setup or utilities
-│   ├── environment.yml            # Conda environment configuration
-│   ├── requirements.txt           # Python dependencies
-│   ├── setup.py                   # Script for installation setup
+├── knowledge_distillation/
+│   ├── student_model.py       # Student model architecture implementation
+│   ├── train_student.py       # Complete training pipeline for the student model
+│   ├── teacher_model.py       # Teacher model implementation
+│   ├── distillation_scheme.py # Implementation of knowledge distillation method/scheme
+│   ├── evaluation.py          # Evaluation scripts producing results identical to Report 3
+│   └── README.md              # Documentation for knowledge distillation
 │
-├── /results/                      # Folder to save model checkpoints, logs, and evaluation results
-│   ├── model_checkpoints/         # Saved models
-│   ├── logs/                      # Training logs
+├── environment/
+│   ├── environment.yml       # Conda environment file with exact library versions
+│   ├── setup_instructions.md # Setup instructions for the environment
+│   └── system_requirements.md # Additional dependencies or system requirements
 │
-├── .gitignore                     # Git ignore file to exclude unnecessary files
-└── README.md                      # Comprehensive project documentation
+├── README.md                 # Comprehensive README for the entire repository
+
 
