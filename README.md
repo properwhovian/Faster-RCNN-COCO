@@ -8,8 +8,8 @@ This project aims to develop an object detection pipeline using the COCO dataset
 - **Knowledge Distillation**: A student model is trained to learn from a teacher model using knowledge transfer techniques.
 
 ## Repository Structure
-
-project_root/
+```bash
+/Object Detection/
 │
 ├── data_processing/
 │   ├── data_preprocessing.py  # Code for importing, cleaning, and processing dataset
