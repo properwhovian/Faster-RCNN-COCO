@@ -39,12 +39,6 @@ This project aims to develop an object detection pipeline using the COCO dataset
 │   ├── model_checkpoints/         # Saved models
 │   ├── logs/                      # Training logs
 │
-├── /docs/                         # Documentation files
-│   ├── README.md                  # README file (project overview, instructions)
-│   ├── report_1.md                # Report 1 (Base model results)
-│   ├── report_2.md                # Report 2 (Data distillation results)
-│   ├── report_3.md                # Report 3 (Knowledge distillation results)
-│
 ├── .gitignore                     # Git ignore file to exclude unnecessary files
 └── README.md                      # Comprehensive project documentation
 
