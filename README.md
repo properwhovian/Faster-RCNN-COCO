@@ -1,4 +1,4 @@
-# Final Project: Object Detection with Knowledge Distillation
+ Object Detection 
 
 ## Overview
 
