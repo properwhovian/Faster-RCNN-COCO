@@ -41,7 +41,7 @@ This project aims to develop an object detection pipeline using the COCO dataset
 │   ├── evaluation.py          # Evaluation scripts producing results identical to Report 3
 │   └── README.md              # Documentation for knowledge distillation
 │
-├── environment/
+├── scripts/
 │   ├── environment.yml       # Conda environment file with exact library versions
 │   ├── setup_instructions.md # Setup instructions for the environment
 │   └── system_requirements.md # Additional dependencies or system requirements
