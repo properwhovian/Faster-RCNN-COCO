@@ -2,6 +2,8 @@
 
 import torch
 from torch.utils.data import DataLoader, random_split
+import torchvision.models as models
+import torch.optim as optim
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 def distill_data(train_dataset, distilled_size_ratio=0.5):
@@ -18,6 +20,7 @@ def distill_data(train_dataset, distilled_size_ratio=0.5):
     distilled_loader = DataLoader(distilled_dataset, batch_size=16, shuffle=True)
     return distilled_loader
 
+
 def train_model(model, dataloader, epochs=10, device='cuda'):
     """
     Train the model using the given dataloader and compute the loss.
@@ -25,7 +28,7 @@ def train_model(model, dataloader, epochs=10, device='cuda'):
     model.to(device)
     model.train()
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
     criterion = torch.nn.CrossEntropyLoss()
 
     for epoch in range(epochs):
@@ -43,3 +46,4 @@ def train_model(model, dataloader, epochs=10, device='cuda'):
         print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(dataloader)}")
 
     return model
+
