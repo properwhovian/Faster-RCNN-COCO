@@ -1,0 +1,38 @@
+# main.py
+
+import os
+import torch
+import matplotlib.pyplot as plt
+from PIL import Image
+from data_processing.data_preprocessing import load_coco_annotations, get_category_names, get_image_info, load_image
+from data_processing.data_augmentation import CustomTransform
+from data_processing.create_splits import create_data_splits
+
+# Define the path to the COCO dataset
+data_dir = '/path'
+
+# Load COCO annotations
+coco = load_coco_annotations(data_dir)
+
+# Get category names
+category_names = get_category_names(coco)
+print("Categories:", category_names)
+
+# Get image information for the first image
+img_id = coco.getImgIds()[0]
+img_info = get_image_info(coco, img_id)
+
+# Load and display the image
+img_path = os.path.join(data_dir, 'train2017', 'train2017', img_info['file_name'])
+img = load_image(img_path)
+if img:
+    plt.imshow(img)
+    plt.axis('off')
+    plt.show()
+
+# Apply data augmentation
+transform = CustomTransform()
+augmented_img, boxes = transform(img, boxes=[])
+
+# Split the dataset into train, validation, and test sets
+train_dataset, val_dataset, test_dataset = create_data_splits(your_dataset)
