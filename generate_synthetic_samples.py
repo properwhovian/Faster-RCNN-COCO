@@ -1,9 +1,9 @@
 # generate_synthetic_samples.py
 
-import torch
 import random
+import torch
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+from torchvision import transforms
 
 def generate_synthetic_samples(dataset, num_samples=1000):
     """
@@ -13,7 +13,7 @@ def generate_synthetic_samples(dataset, num_samples=1000):
     for _ in range(num_samples):
         idx = random.randint(0, len(dataset) - 1)
         img, target = dataset[idx]
-      
+       
         transform = transforms.RandomHorizontalFlip(p=1)
         img = transform(img)
         synthetic_samples.append((img, target))
@@ -26,3 +26,4 @@ def create_synthetic_loader(dataset, num_samples=1000, batch_size=16):
     synthetic_samples = generate_synthetic_samples(dataset, num_samples)
     synthetic_loader = DataLoader(synthetic_samples, batch_size=batch_size, shuffle=True)
     return synthetic_loader
+
