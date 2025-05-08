@@ -37,7 +37,7 @@ This project aims to develop an object detection pipeline using the COCO dataset
 │   ├── student_model.py       # Student model architecture implementation
 │   ├── train_student.py       # Complete training pipeline for the student model
 │   ├── teacher_model.py       # Teacher model implementation
-│   ├── distillation_scheme.py # Implementation of knowledge distillation method/scheme
+│   ├── distillation.py # Implementation of knowledge distillation method/scheme
 │   ├── evaluation.py          # Evaluation scripts producing results identical to Report 3
 │   └── README.md              # Documentation for knowledge distillation
 │
