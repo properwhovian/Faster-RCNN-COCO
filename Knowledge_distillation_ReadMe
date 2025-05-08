@@ -1,0 +1,30 @@
+# Knowledge Distillation
+
+This repository contains the implementation for Knowledge Distillation, where a student model is trained to mimic a pre-trained teacher model.
+
+## Files
+
+- **student_model.py**: Contains the student model architecture, which is a smaller version of the teacher model.
+- **distillation.py**: Contains the logic for calculating the distillation loss and transferring knowledge from the teacher to the student.
+- **train_student.py**: Script to train the student model using distillation.
+- **evaluate_student.py**: Script to evaluate the trained student model.
+- **report_3_metrics.py**: Code to reproduce performance metrics reported in Report 3.
+
+## How to Run
+
+1. First, train the student model using the `train_student.py` script.
+2. Once trained, evaluate the student model using the `evaluate_student.py` script.
+3. You can check the performance metrics using `report_3_metrics.py`.
+
+## Dependencies
+
+- PyTorch
+- torchvision
+- pycocotools
+- scikit-learn
+
+Make sure to set up your environment and install the necessary dependencies as described in the environment configuration section.
+
+## Results
+
+After training, the student model will attempt to approximate the teacher's performance while being more computationally efficient. The evaluation script will show performance metrics such as accuracy, precision, recall, and F1-score.
